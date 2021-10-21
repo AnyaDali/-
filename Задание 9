@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+//Дано натуральное число n. Определить, есть ли хотя бы одна цифра 9 в записи числа
+
+int main() 
+{
+    int n, cn, flag;
+    flag = 0;
+    printf("Enter n: ");
+    scanf("%d", &n);
+    cn = n;
+    while(cn > 0) {
+        if(cn % 10 == 9) {
+            flag = 1;
+            break;
+        }
+
+        cn /= 10;
+    }
+
+    if(flag == 0)
+        printf("в записи числа нет цифр 9\n");
+    else
+        printf("В числе есть цифра 9\n");
+
+    return 0;
+}
