@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+//Дано натуральное число n. Определить, является ли число степенью числа 2
+int main() 
+{
+    int n, flag; /n-число, flag -флаг(true,false)
+    flag = 1;
+    scanf("%d", &n);
+    while(n > 1) 
+    {
+        if(n % 2 != 0) 
+        {
+            flag = 0;
+            break;
+        }
+
+        n = n/2;
+    }
+
+    if(flag == 1)
+        printf("TRUE\n");
+    else
+        printf("FALSE\n"); 
+    return 0;
+}
