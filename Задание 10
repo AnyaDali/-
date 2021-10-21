@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+
+//Дана последовательность целых чисел. Удалить, если есть, элементы равные 0
+//Проверить, является ли, получаеммая последовательность знакочередующейся
+
+int main() 
+{ 
+    int n, sign, flag;
+    scanf("%d", &n);
+    int arr[n];
+    
+    int i = 0;
+    while(i < n)
+    {
+        printf("Введите элемент: ");
+        scanf("%d", &arr[i]);
+        i = i + 1;
+    }
+
+    flag = 1;
+    int temp = arr[0];
+    int d = 1;
+    while (temp == 0)
+    {
+        temp = arr[d];
+        d = d + 1;
+    }
+
+    if(temp < 0)
+        sign = 0; //знак у предыдущего числа
+    else
+        sign = 1;
+    
+    int c = 0; 
+    while(c < n) 
+    {
+        if(arr[i] != 0) {
+            if(!( (arr[i] > 0 && sign != 1) || (arr[i] < 0 && sign != 0) ) ) {
+                flag = 0;
+                break;
+            } 
+            else
+                sign = !sign;
+        }
+        c = c + 1; 
+    }
+
+    if(flag == 0)
+        printf("последовательность не является знакочередующейся\n");
+    else
+    {
+        int f = 0;
+        whilr(f < n)
+        {
+            if(arr[i] != 0)
+                printf("arr[%d] = %d\n", i, arr[i]);
+        }
+    }
+    return 0;
+}
