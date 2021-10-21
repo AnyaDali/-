@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+//Дана последовательность целых чисел. Определить, является ли макс. элемент четным числом
+int main() {
+    int n, a, b, max; //a-первый элемент, max-максимальное число,b- следующий элемент, n-размер последовательности,
+    scanf("%d", &n);
+    scanf("%d", &a);
+    max = a;
+    while(n > 1) 
+    {
+        scanf("%d", &b);
+        if(b > max) 
+            max = b;
+        a = b;
+        n=n-1;
+    }
+
+    if(max % 2 == 0)
+        printf("Является\n");
+    else
+        printf("Не является\n");
+    return 0;
+}
