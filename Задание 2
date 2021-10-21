@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+//Дано натуральное число n. Определить, является ли число паллиндроном.
+int main() {
+  int num;
+	scanf("%d", &num);
+
+	int n = num; //копия числа
+	int swn = 0; //число в обратном порядке
+
+	while (n > 0)
+	{
+		swn = swm * 10 + n % 10;
+		n /= 10;
+	}
+	if (num == swn)
+		printf("Полиндром\n");
+	else
+		printf("Не полиндром\n");
+
+	return 0;
+}
