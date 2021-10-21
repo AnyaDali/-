@@ -1,22 +1,24 @@
 #include <stdio.h>
 using namespace std;
 //Дано натуральное число n. Определить, является ли простым числом
-int main() {
+int main() 
+{
     int n, count;
     count = 0;
-    printf("Enter n: ");
     scanf("%d", &n);
-    for(int del = 2; del < n; ++del) {
+    int del = 2;
+    while( del < n)
+    }
         if(count != 0)
             break;
         if(n % del == 0)
-            ++count;
-        ++del;
+            count = count + 1;
+        del = del + 1;
     }
 
     if(count == 0)
-        printf("TRUE\n");
+        printf("Число является простым\n);
     else
-        printf("FALSE\n");
+        printf("Число не является простым\n);
     return 0;
 }
