@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+//Дано натуральное число n. Если n < 10, то положить M=n!, иначе M=n^k, где К подается с ввода
+int main() {
+    int n, M;
+    scanf("%d", &n);
+    M = 1;
+    if(n < 10) 
+    {
+        int s = 1;
+        while(s<n)
+            {
+               M=M*s;
+               s=s+1;
+             }
+    }
+    else {
+        int k; //Степень для n
+        printf("Введите k: ");
+        scanf("%d", &k);
+        int i=0;
+        while(i<k)
+        {
+            M= M*n;
+            i=i+1;
+        }
+    }
+
+    printf("M = %d\n", M);
+    return 0;
+}
