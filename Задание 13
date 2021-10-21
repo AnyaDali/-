@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+//Дано натуральное число n. Определить, какие цифры и сколько раз встречаются в записи числа.
+
+int main() 
+{
+    int n;
+    int digits[10] = {};
+    printf("Введите число: ");
+    scanf("%d", &n);
+    while(n > 0) 
+    {
+        digits[n % 10] += 1;
+        n = n / 10;
+    }
+    
+    int i = 0;
+    for(i < 10;) 
+    {
+        if(digits[i] != 0)
+            printf("число %d встречается %d раз\n", i, digits[i]);
+        i = i + 1;
+    }
+    return 0;
+}
