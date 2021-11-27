@@ -1,0 +1,43 @@
+#include<iostream>
+using namespace std;
+
+//Задание 25, массив A, массив B, упорядоченные по неубыванию обе - k = 2, одна - 1, ни одна 0
+
+bool UP(int* arr, int n)
+{
+	bool flag = true;
+	for (size_t i = 0; i < (n - 1); i++)
+	{
+		if (arr[i] > arr[i + 1])
+		{
+			flag = false;
+			break;
+		}
+	}
+	return flag;
+}
+
+void Vvod(int* arr, size_t &n)
+{
+
+	for (size_t i = 0; i < n; i++)
+	{
+		scanf_s("%d", &arr[i]);
+	}
+}
+
+int main()
+{
+	int k1;
+	size_t n = 5, k = 6;
+	int* arr;
+	int* brr;
+	arr = new int[n];
+	brr = new int[k];
+	Vvod(arr, n);
+	Vvod(brr, k);
+
+	k1 = UP(arr, n) + UP(brr, k);
+	printf("%d", k1);
+	return 0;
+}
