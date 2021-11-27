@@ -39,5 +39,7 @@ int main()
 
 	k1 = UP(arr, n) + UP(brr, k);
 	printf("%d", k1);
+	delete[] arr;
+	delete[] brr;
 	return 0;
 }
