@@ -1,0 +1,49 @@
+#include <iostream>;
+using namespace std;
+
+//Дан целочисленный массив, сколько элеметов числа Фиббоначи
+
+void Vvod(int* arr, int& n)
+{
+
+	for (int i = 0; i < n; i++)
+	{
+		scanf_s("%d", &arr[i]);
+	}
+}
+
+int Fib(int* arr, int n)
+{
+	int res=0;
+	for (int i = 0; i < n; i++)
+	{
+		bool flag = false;
+		int cur = 0;
+		int next = 1;
+		int temp = 0;
+		while (cur < arr[i])
+		{
+			temp = cur;
+			cur = next;
+			next = next + temp;
+		}
+		if (cur == arr[i])
+			res += 1;
+	}
+	return res;
+}
+
+int main()
+{
+	int* arr;
+	int n = 5;
+	arr = new int[n];
+	Vvod(arr, n);
+	int res = Fib(arr, n);
+	if (res != 0)
+		printf("%d", res);
+	else
+		printf("Таких чисел нет");
+	delete[] arr;
+	return 0;
+}
