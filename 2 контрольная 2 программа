@@ -1,0 +1,112 @@
+//ДОДЕЛАТЬ!!!
+
+
+
+
+#include <iostream>
+#include <iostream>
+using namespace std;
+
+int** mem(int n, int m)
+{
+	int** a;
+	a = new int* [n];
+	for (int i = 0; i < n; i++)
+		a[i] = new int;
+
+	return a;
+}
+
+int printmat(int** a, int n, int m)
+{
+	for (int i = 0; i < m; i++)
+
+		for (int j = 0; j < n; j++)
+			printf("%d", a[i][j]);
+	
+	return 0;
+}
+
+bool UP(int** a, int n)
+{
+	bool flag = true;
+	for (int i = 0; i < n-1; i++)
+	{
+		if (a[i] > a[i + 1])
+		{
+			flag = false;
+			break;
+		}
+	}
+	return flag;
+}
+
+int count(int n)
+{
+	int cnt = 0;
+	while (n > 0)
+	{
+		cnt++;
+		n = n / 10;
+	}
+	return cnt;
+}
+
+int maxus(int** a, int n, int m)
+{
+	int max = 0;
+	for (int i = 0; i < m; i++)
+		if (UP(a, i) == 1)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				if (a[i][j] > max)
+					max = a[i][j];
+			}
+		}
+	return max;
+}
+
+int delmem(int** a, int n, int m)
+{
+	for (int i = 0; i < m; i++)
+		for (int j = 0; j < n; j++)
+			delete[j] a;
+	return 0;
+}
+
+int VVod( int n, int m)
+{
+	int** a;
+	for (int j = 0; j < m; j++)
+		for (int i = 0; i < n; i++)
+			scanf("%d", &a[i][j]);
+	return **a;
+}
+
+int main()
+{
+	int n, m, k, l;
+	int w = 0;
+	scanf_s("%d, %d, %d, %d", &n,& m, &k, &l);
+	mem(n, m);
+	mem(k, l);
+	int a= VVod(n, m);
+	int b= VVod(k, l);
+
+	setlocale(LC_ALL, ".1251");
+
+	if (count(maxus(a, n, m)) % 2 != 0)
+		printmat(a, n, m);
+	else printf("Матрица 1 не содержит упорядоченных строк");;
+
+	if (count(maxus(b, k, l)) % 2 != 0)
+		printmat(b, k, l);
+	else printf("Матрица 2 не содержит упорядоченных строк");;
+
+	delmem(a, n, m);
+	delmem(b, k, l);
+
+	return 0;
+	
+}
