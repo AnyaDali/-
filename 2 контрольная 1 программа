@@ -1,0 +1,25 @@
+#include <iostream>
+#include <locale.h>
+using namespace std;
+
+int Fib(int x)
+{
+	int cur = 1;
+	int i = 0;
+	int next = 2;
+	for (int new1 = 2; new1 <= x; new1 = new1 + i)
+	{
+		i = cur;
+		cur = new1;
+		next = new1+i;
+	}
+	return next;
+}
+
+int main()
+{
+	int n;
+	scanf_s("%d", &n);
+	setlocale(LC_ALL, ".1251");
+	printf("Следующее число Фибоначчи: %d ", Fib(n));
+}
