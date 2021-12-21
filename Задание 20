@@ -1,0 +1,113 @@
+#include <iostream>
+using namespace std;
+
+//Задание 20. Массив размерности n, является ли посл-ть арифметич.прогрессией(между первым и последним сов.числом)
+
+int* allocate_memory(const int& n)
+{
+    int* a = new int[n];
+    return a;
+}
+
+void destroy(int* a)
+{
+    delete[] a;
+}
+
+void intput(int* a, const int& n)
+{
+    for (int i = 0; i < n; ++i)
+    {
+        scanf_s("%d", &a[i]);
+    }
+}
+
+void output(int* a, const int& n)
+{
+    for (int i = 0; i < n; ++i)
+    {
+        printf("%d", a[i]);
+    }
+}
+
+bool isPerfectNum(const int& num)
+{
+    int sum_del = 0;
+    for (int cur = 1; cur < num; ++cur)
+    {
+        if (num % cur == 0)
+            sum_del += cur;
+    }
+    if (num == sum_del)
+        return true;
+    else
+        return false;
+}
+
+int getLeftIndex(const int* a, const int& n)
+{
+    int leftIndex = -1;
+    for (int i = 0; i < n; ++i)
+    {
+        if (isPerfectNum(a[i]))
+        {
+            leftIndex = i;
+            return i;
+        }
+    }
+
+    return leftIndex;
+}
+
+int getRightIndex(const int* a, const int& n)
+{
+    int rightIndex = -1;
+    for (int i = n - 1; i >= 0; --i)
+    {
+        if (isPerfectNum(a[i]))
+        {
+            rightIndex = i;
+            return i;
+        }
+    }
+
+    return rightIndex;
+}
+
+bool sequence(const int* a, const int& n)
+{
+    int leftBorder, rightBorder;
+    if ((leftBorder = getLeftIndex(a, n)) == -1)
+        return false;
+    rightBorder = getRightIndex(a, n);
+    printf("l= %d\n", leftBorder);
+    printf("r= %d\n", rightBorder);
+    if (rightBorder - leftBorder <= 2)
+        return true;
+
+
+
+    int delta = a[leftBorder + 2] - a[leftBorder + 1];
+    printf("delta = %d\n", delta);
+    int curVal = a[leftBorder + 1];
+    for (int i = leftBorder + 1; i < rightBorder; ++i)
+    {
+        curVal += delta;
+        if (curVal != a[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main()
+{
+    int n;
+    scanf_s("%d", &n);
+    int* a = allocate_memory(n);
+    intput(a, n);
+    bool fl = sequence(a, n);
+    printf("%d\n", fl);
+    return 0;
+}
