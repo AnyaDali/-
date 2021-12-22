@@ -1,0 +1,69 @@
+#include <iostream>
+using namespace std;
+
+int** allocate_memory(int n)
+{
+	int** a;
+	a = new int* [n];
+	for (int i = 0; i < n; i++)
+		a[i] = new int;
+	return a;
+}
+
+int** input(int** a, int n)
+{
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			scanf_s("%d", &a[i][j]);
+	return a;
+}
+
+int destroy(int** a, int n)
+{
+	for (int i = 0; i < n; i++)
+		delete[] a[i];
+	return 0;
+}
+
+void min(int** a, int n, int min, int index1, int index2)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (a[i][j] < min)
+			{
+				min = a[i][j];
+				index1 = i;
+				index2 = j;
+			}
+		}
+	}
+}
+
+int sclrprz(int** a, int n, int index1, int index2)
+{
+	int count = 0;
+	int sum;
+	for (int j = 0; j < n; j++)
+	{
+		sum = a[index1][j] * a[j][index2];
+		count += sum;
+	}
+	return count;
+}
+
+int main()
+{
+	int** a;
+	int n;
+	scanf_s("%d", &n);
+	a = allocate_memory(n);
+	input(a, n);
+	int minimum = 1000;
+	int index1 =0, index2=0;
+	min(a, n, minimum, index1, index2);
+	printf("%d", sclrprz(a, n, index1, index2));
+	destroy(a, n);
+	return 0;
+}
