@@ -1,36 +1,29 @@
-//ДОДЕЛАТЬ!!!
-
-
-
-
-#include <iostream>
 #include <iostream>
 using namespace std;
 
-int** mem(int n, int m)
+int** memory_allocate(int n, int m)
 {
 	int** a;
 	a = new int* [n];
 	for (int i = 0; i < n; i++)
-		a[i] = new int;
+		a[i] = new int[m];
 
 	return a;
 }
 
 int printmat(int** a, int n, int m)
 {
-	for (int i = 0; i < m; i++)
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			printf("%d\n", a[i][j]);
 
-		for (int j = 0; j < n; j++)
-			printf("%d", a[i][j]);
-	
 	return 0;
 }
 
 bool UP(int** a, int n)
 {
 	bool flag = true;
-	for (int i = 0; i < n-1; i++)
+	for (int i = 0; i < n - 1; i++)
 	{
 		if (a[i] > a[i + 1])
 		{
@@ -67,46 +60,50 @@ int maxus(int** a, int n, int m)
 	return max;
 }
 
-int delmem(int** a, int n, int m)
+int destroy(int** a, int n, int m)
 {
-	for (int i = 0; i < m; i++)
-		for (int j = 0; j < n; j++)
-			delete[j] a;
+	for (int i = 0; i < n; i++)
+		delete[] a[i];
 	return 0;
 }
 
-int VVod( int n, int m)
+int** input(int** a, int n, int m)
 {
-	int** a;
 	for (int j = 0; j < m; j++)
 		for (int i = 0; i < n; i++)
-			scanf("%d", &a[i][j]);
-	return **a;
+			scanf_s("%d", &a[i][j]);
+	return a;
 }
 
 int main()
 {
 	int n, m, k, l;
 	int w = 0;
-	scanf_s("%d, %d, %d, %d", &n,& m, &k, &l);
-	mem(n, m);
-	mem(k, l);
-	int a= VVod(n, m);
-	int b= VVod(k, l);
+	scanf_s("%d%d%d%d", &n, &m, &k, &l);
+	int** a;
+	int** b;
+	a = memory_allocate(n, m);
+	b = memory_allocate(k, l);
+	input(a, n, m);
+	input(b, k, l);
 
 	setlocale(LC_ALL, ".1251");
 
-	if (count(maxus(a, n, m)) % 2 != 0)
-		printmat(a, n, m);
-	else printf("Матрица 1 не содержит упорядоченных строк");;
+	if (count(maxus(a, n, m)) != 0)
+		if (count(maxus(a, n, m)) % 2 != 0)
+			printmat(a, n, m);
+		else
+			printf("Матрица 1 не содержит упорядоченных строк");;
 
-	if (count(maxus(b, k, l)) % 2 != 0)
-		printmat(b, k, l);
-	else printf("Матрица 2 не содержит упорядоченных строк");;
+	if (count(maxus(b, k, l)) != 0)
+		if (count(maxus(b, k, l)) % 2 != 0)
+			printmat(b, k, l);
+	else
+			printf("Матрица 2 не содержит упорядоченных строк");;
 
-	delmem(a, n, m);
-	delmem(b, k, l);
+	destroy(a, n, m);
+	destroy(b, k, l);
 
 	return 0;
-	
+
 }
