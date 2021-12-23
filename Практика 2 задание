@@ -3,7 +3,7 @@
 using namespace std;
 
 
-//Перестановкой 2х строк и/или 2х столбов сделать так, чтобы наименьший по модулю элемент был в левом нижнем углу
+//Перестановкой 2х строк и/или 2х столбов сделать так, чтобы наибольший по модулю элемент был в левом нижнем углу
 
 int** switchstr(int** a, int n, int index1, int index3)
 {
@@ -65,9 +65,9 @@ int destroy(int** a, int n)
 	return 0;
 }
 
-void minimum(int** a, int& n, int& index1, int& index2)
+void maximum(int** a, int& n, int& index1, int& index2)
 {
-	int min = 1000;
+	int max = -1000;
 	int k;
 	for(int i=0; i<n;i++)
 		for (int j = 0; j < n; j++)
@@ -76,9 +76,9 @@ void minimum(int** a, int& n, int& index1, int& index2)
 				k = a[i][j] * -1;
 			else
 				k = a[i][j];
-			if (k < min)
+			if (k > max)
 			{
-				min = k;
+				max = k;
 				index1 = i;
 				index2 = j;
 			}
@@ -90,7 +90,7 @@ void minimum(int** a, int& n, int& index1, int& index2)
 void Left(int** a, int n)
 {
 	int index1, index2;
-	minimum(a, n, index1, index2);
+	maximum(a, n, index1, index2);
 	switchstr(a, n, index1, n-1);
 	switchcollumn(a, n, index2, 0);
 }
@@ -109,4 +109,5 @@ int main()
 
 	return 0;
 }
+
 
