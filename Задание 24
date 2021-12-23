@@ -1,52 +1,51 @@
 #include <iostream>
-#include <cmath>
 
 //Построить матрицу С, где c[i][j] равен сумме элементов i-ой строки матрицы A, которые отстутствуют в j-ом столбце B, 0 в противном случае
 
-float **memory_alloc(const int &n, const int &m)
+int** memory_alloc(const int& n, const int& m)
 {
-    float **a = new float *[n];
-    for (size_t i = 0; i < n; ++i)
+    int** a = new int* [n];
+    for (int i = 0; i < n; ++i)
     {
-        a[i] = new float[m];
+        a[i] = new int[m];
     }
     return a;
 }
 
-void destroy(float **a, const int &n)
+void destroy(int** a, const int& n)
 {
-    for (size_t i = 0; i < n; ++i)
+    for (int i = 0; i < n; ++i)
     {
         delete[] a[i];
     }
 }
 
-void input(float **a, const int &n, const int &m)
+void input(int** a, const int& n, const int& m)
 {
-    for (size_t i = 0; i < n; ++i)
+    for (int i = 0; i < n; ++i)
     {
-        for (size_t j = 0; j < m; ++j)
+        for (int j = 0; j < m; ++j)
         {
-            scanf("%f", &a[i][j]);
+            scanf_s("%d", &a[i][j]);
         }
     }
 }
 
-void output(float **a, const int &n, const int &m)
+void output(int** a, const int& n, const int& m)
 {
-    for (size_t i = 0; i < n; ++i)
+    for (int i = 0; i < n; ++i)
     {
-        for (size_t j = 0; j < m; ++j)
+        for (int j = 0; j < m; ++j)
         {
-            printf("%f ", a[i][j]);
+            printf("%d ", a[i][j]);
         }
         printf("\n");
     }
 }
 
-bool __search(float **b, const int &n, const int &j_index,const float& param)
+bool __search(int** b, const int& n, const int& j_index, const float& param)
 {
-    for (size_t i = 0; i < n; ++i)
+    for (int i = 0; i < n; ++i)
     {
         if (fabs(b[i][j_index] - param) < 0.001)
             return true;
@@ -54,10 +53,10 @@ bool __search(float **b, const int &n, const int &j_index,const float& param)
     return false;
 }
 
-float __getElem(float **a, float **b, const int &n, const int &m, const int &i_index, const int &j_index)
+int __getElem(int** a, int** b, const int& n, const int& m, const int& i_index, const int& j_index)
 {
-    float sum = 0;
-    for (size_t j = 0; j < m; ++j)
+    int sum = 0;
+    for (int j = 0; j < m; ++j)
     {
         if (!__search(b, n, j, a[i_index][j]))
             sum += a[i_index][j];
@@ -65,14 +64,14 @@ float __getElem(float **a, float **b, const int &n, const int &m, const int &i_i
     return sum;
 }
 
-float **get_matrix(float **a, float **b, const int &n, const int &m)
+int** get_matrix(int** a, int** b, const int& n, const int& m)
 {
-    float **c = memory_alloc(n, m);
+    int** c = memory_alloc(n, m);
 
 
-    for (size_t i = 0; i < n; ++i)
+    for (int i = 0; i < n; ++i)
     {
-        for (size_t j = 0; j < m; ++j)
+        for (int j = 0; j < m; ++j)
         {
             c[i][j] = __getElem(a, b, n, m, i, j);
         }
@@ -83,12 +82,12 @@ float **get_matrix(float **a, float **b, const int &n, const int &m)
 int main()
 {
     int n, m;
-    scanf("%d%d", &n, &m);
-    float **a = memory_alloc(n, m);
-    float **b = memory_alloc(n, m);
+    scanf_s("%d%d", &n, &m);
+    int** a = memory_alloc(n, m);
+    int** b = memory_alloc(n, m);
     input(a, n, m);
     input(b, n, m);
-    float **c = get_matrix(a, b, n, m);
+    int** c = get_matrix(a, b, n, m);
     output(c, n, m);
     destroy(a, n);
     destroy(b, n);
