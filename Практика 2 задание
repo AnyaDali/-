@@ -1,0 +1,112 @@
+#include <iostream>
+#include <locale.h>
+using namespace std;
+
+
+//Перестановкой 2х строк и/или 2х столбов сделать так, чтобы наименьший по модулю элемент был в левом нижнем углу
+
+int** switchstr(int** a, int n, int index1, int index3)
+{
+	int k;
+	for (int i = 0; i < n; i++)
+	{
+		k = a[index1][i];
+		a[index1][i] = a[index3][i];
+		a[index3][i] = k;
+	}
+	return a;
+}
+
+int** switchcollumn(int** a, int n, int index1, int index3)
+{
+	int k;
+	for (int i = 0; i < n; i++)
+	{
+		k = a[i][index1];
+		a[i][index1] = a[i][index3];
+		a[i][index3] = k;
+	}
+	return a;
+}
+
+int** allocate_memory(int n)
+{
+	int** a;
+	a = new int* [n];
+	for (int i = 0; i < n; i++)
+		a[i] = new int [n];
+	return a;
+}
+
+void input(int** a, int n)
+{
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			scanf_s("%d", &a[i][j]);
+}
+
+void output(int** a, int n)
+{
+	printf("Новая матрица: \n");
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			printf("%d ", a[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+int destroy(int** a, int n)
+{
+	for (int i = 0; i < n; i++)
+		delete[] a[i];
+	return 0;
+}
+
+void minimum(int** a, int& n, int& index1, int& index2)
+{
+	int min = 1000;
+	int k;
+	for(int i=0; i<n;i++)
+		for (int j = 0; j < n; j++)
+		{
+			if (a[i][j] < 0)
+				k = a[i][j] * -1;
+			else
+				k = a[i][j];
+			if (k < min)
+			{
+				min = k;
+				index1 = i;
+				index2 = j;
+			}
+
+
+		}
+}
+
+void Left(int** a, int n)
+{
+	int index1, index2;
+	minimum(a, n, index1, index2);
+	switchstr(a, n, index1, n-1);
+	switchcollumn(a, n, index2, 0);
+}
+
+int main()
+{
+	setlocale(LC_ALL, ".1251");
+
+	int n;
+	scanf_s("%d", &n);
+	int** a = allocate_memory(n);
+	input(a, n);
+	Left(a, n);
+	output(a, n);
+	destroy(a, n);
+
+	return 0;
+}
+
