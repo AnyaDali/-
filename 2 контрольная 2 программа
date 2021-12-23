@@ -14,16 +14,14 @@ int** memory_allocate(int n, int m)
 	return a;
 }
 
-int printmat(int** a, int n, int m)
+void printmat(int** a, int n, int m)
 {
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < m; j++)
 			printf("%d\n", a[i][j]);
-
-	return 0;
 }
 
-bool UP(int** a, int n)
+bool UP(int* a, int n)
 {
 	bool flag = true;
 	for (int i = 0; i < n - 1; i++)
@@ -51,14 +49,11 @@ int count(int n)
 int maxus(int** a, int n, int m)
 {
 	int max = 0;
-	for (int i = 0; i < m; i++)
-		if (UP(a, i) == 1)
+	for (int i = 0; i < n; i++)
+		if (UP(a[i], m))
 		{
-			for (int j = 0; j < n; j++)
-			{
-				if (a[i][j] > max)
-					max = a[i][j];
-			}
+			if (a[i][m-1] > max)
+				max = a[i][m-1];
 		}
 	return max;
 }
@@ -95,14 +90,14 @@ int main()
 	if (count(maxus(a, n, m)) != 0)
 		if (count(maxus(a, n, m)) % 2 != 0)
 			printmat(a, n, m);
-		else
-			printf("Матрица 1 не содержит упорядоченных строк");;
+	else
+		printf("Матрица 1 не содержит упорядоченных строк");;
 
 	if (count(maxus(b, k, l)) != 0)
 		if (count(maxus(b, k, l)) % 2 != 0)
 			printmat(b, k, l);
 	else
-			printf("Матрица 2 не содержит упорядоченных строк");;
+		printf("Матрица 2 не содержит упорядоченных строк");;
 
 	destroy(a, n, m);
 	destroy(b, k, l);
