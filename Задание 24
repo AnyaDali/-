@@ -1,5 +1,8 @@
 #include <iostream>
 #include <cmath>
+
+//Построить матрицу С, где c[i][j] равен сумме элементов i-ой строки матрицы A, которые отстутствуют в j-ом столбце B, 0 в противном случае
+
 float **memory_alloc(const int &n, const int &m)
 {
     float **a = new float *[n];
