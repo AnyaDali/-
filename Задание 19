@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+//Колитчество строк и столбцов, в которых элементы попарно различны.
+
 int** memory_allocate(const int& n, const int& m)
 {
 	int** a;
