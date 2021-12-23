@@ -1,6 +1,8 @@
 #include<iostream>
 using namespace std;
 
+//s = x1 +x1*x2 + x1*x2*x3 и тд. m - номер первого отрицательного элемента массива x, либо вывести n - нет отрицательных элементов.
+
 const int n = 5;
 
 int* mem(const int& n)
