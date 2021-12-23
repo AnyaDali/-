@@ -2,6 +2,8 @@
 #include <locale.h>
 using namespace std;
 
+//Первое число Фиб, большее n
+
 int Fib(int x)
 {
 	int cur = 1;
