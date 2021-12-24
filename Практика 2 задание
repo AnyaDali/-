@@ -87,14 +87,6 @@ void maximum(int** a, int& n, int& index1, int& index2)
 		}
 }
 
-void Left(int** a, int n)
-{
-	int index1, index2;
-	maximum(a, n, index1, index2);
-	switchstr(a, n, index1, n-1);
-	switchcollumn(a, n, index2, 0);
-}
-
 int main()
 {
 	setlocale(LC_ALL, ".1251");
@@ -103,7 +95,10 @@ int main()
 	scanf_s("%d", &n);
 	int** a = allocate_memory(n);
 	input(a, n);
-	Left(a, n);
+	int index1, index2;
+	maximum(a, n, index1, index2);
+	switchstr(a, n, index1, n - 1);
+	switchcollumn(a, n, index2, 0);
 	output(a, n);
 	destroy(a, n);
 
